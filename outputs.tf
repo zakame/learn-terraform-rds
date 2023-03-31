@@ -20,6 +20,11 @@ output "rds_username" {
 }
 
 output "rds_master_password_secret" {
-  description = "RDS master password data resource in Secrets Manager"
+  description = "RDS master user secret details"
+  value       = aws_db_instance.education.master_user_secret
+}
+
+output "rds_master_password_secret_data" {
+  description = "RDS master user secret data resource in Secrets Manager"
   value       = data.aws_secretsmanager_secret.education
 }
