@@ -76,3 +76,18 @@ resource "aws_db_instance" "education" {
 
   manage_master_user_password = true
 }
+
+data "aws_secretsmanager_secrets" "education" {
+  filter {
+    name   = "owning-service"
+    values = ["rds"]
+  }
+  filter {
+    name   = "tag-value"
+    values = [aws_db_instance.education.arn]
+  }
+}
+
+data "aws_secretsmanager_secret" "education" {
+  arn = tolist(data.aws_secretsmanager_secrets.education.arns)[0]
+}

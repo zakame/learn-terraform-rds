@@ -19,3 +19,7 @@ output "rds_username" {
   sensitive   = true
 }
 
+output "rds_master_password_secret" {
+  description = "RDS master password data resource in Secrets Manager"
+  value       = data.aws_secretsmanager_secret.education
+}
